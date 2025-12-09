@@ -181,7 +181,7 @@ func Login() gin.HandlerFunc {
 		}
 
 		// if all goes well, then you'll generate tokens
-		token, refreshToken, _ := helper.GenerateAllTokens(*&foundUser.Email, *&foundUser.First_name, *foundUser.Last_name, foundUser.User_id)
+		token, refreshToken, _ := helper.GenerateAllTokens(*foundUser.Email, *foundUser.First_name, *foundUser.Last_name, foundUser.User_id)
 
 		// update tokens - token and refresh token
 		helper.UpdateAllTokens(token, refreshToken, foundUser.User_id)
@@ -206,7 +206,7 @@ func VerifyPassword(userPassword string, providePassword string) (bool, string) 
 	msg := ""
 
 	if err != nil {
-		msg := fmt.Sprintf("login or password is incorrect")
+		msg = fmt.Sprintf("login or password is incorrect")
 		check = false
 	}
 	return check, msg
